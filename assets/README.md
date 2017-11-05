@@ -1,0 +1,1 @@
+# Frontend for My CI (goci)

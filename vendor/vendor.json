@@ -1,0 +1,67 @@
+{
+	"comment": "",
+	"ignore": "",
+	"package": [
+		{
+			"checksumSHA1": "CkmkmMg//WpCBT4ZZw88+lVAArk=",
+			"path": "github.com/Unknwon/com",
+			"revision": "7677a1d7c1137cd3dd5ba7a076d0c898a1ef4520",
+			"revisionTime": "2017-08-19T22:39:52Z"
+		},
+		{
+			"checksumSHA1": "YAjrZt+VewvYFyBzMLpZXIpHQOk=",
+			"path": "github.com/emicklei/go-restful",
+			"revision": "dc0f94ee75de39d6420e5446b0222490264bb90f",
+			"revisionTime": "2017-10-05T04:51:49Z"
+		},
+		{
+			"checksumSHA1": "Q0LQ+8fcjj6s4gmXG2mrjPw5Deo=",
+			"path": "github.com/go-clog/clog",
+			"revision": "8492a6faa632c31ba82f562b53b4a6e5eacf2732",
+			"revisionTime": "2017-05-26T21:48:39Z"
+		},
+		{
+			"checksumSHA1": "DKR5kSovqesvlwyZCVRy9sdl0pg=",
+			"path": "github.com/go-sql-driver/mysql",
+			"revision": "fade21009797158e7b79e04c340118a9220c6f9e",
+			"revisionTime": "2017-10-17T18:16:16Z"
+		},
+		{
+			"checksumSHA1": "/9Mb+5AH0s/t7YaosHborebSQXg=",
+			"path": "github.com/go-xorm/xorm",
+			"revision": "865979f7160bacccdf910a398b132583891c1173",
+			"revisionTime": "2017-10-30T03:07:56Z"
+		},
+		{
+			"checksumSHA1": "4TIb3LdllvI3pufsT9SSHvx6ewI=",
+			"path": "github.com/mcuadros/go-version",
+			"revision": "88e56e02bea1c203c99222c365fa52a69996ccac",
+			"revisionTime": "2017-10-03T09:47:16Z"
+		},
+		{
+			"checksumSHA1": "9ksn2hj7K/jGJHP+JfJBPGw/fjo=",
+			"path": "github.com/urfave/cli",
+			"revision": "7bc6a0acffa589f415f88aca16cc1de5ffd66f9c",
+			"revisionTime": "2017-10-14T20:27:26Z"
+		},
+		{
+			"checksumSHA1": "JOJHxFm3ArTV3oUSH6Q2sjeMnrs=",
+			"path": "golang.org/x/crypto/pbkdf2",
+			"revision": "2509b142fb2b797aa7587dad548f113b2c0f20ce",
+			"revisionTime": "2017-10-23T14:45:55Z"
+		},
+		{
+			"checksumSHA1": "lbE4INmMU+11H7NO+I1KhJ2oRWk=",
+			"path": "gopkg.in/ini.v1",
+			"revision": "f280b3ba517bf5fc98922624f21fb0e7a92adaec",
+			"revisionTime": "2017-10-26T18:46:43Z"
+		},
+		{
+			"checksumSHA1": "S+KuGPaJvpacXBiX+uwnvuBCxRE=",
+			"path": "gopkg.in/macaron.v1",
+			"revision": "534b5803c7c0bfb3a59632359a94bc761d393d4c",
+			"revisionTime": "2017-10-17T18:59:53Z"
+		}
+	],
+	"rootPath": "github.com/Dell-/goci"
+}

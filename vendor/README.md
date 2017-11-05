@@ -1,0 +1,15 @@
+To install
+```bash
+go get -u github.com/kardianos/govendor
+```
+
+Repository - https://github.com/kardianos/govendor
+
+1. Delete package directory from vendor when developing new code of dependency.
+2. After commit on dependency, run:
+	govendor update <import path>
+3. Introduce a new dependency, run:
+	govendor add +vendor <import path>
+4. To update all deependencies, delete all packages from vendor, and run:
+	govendor add +vendor +external
+5. Too hard.

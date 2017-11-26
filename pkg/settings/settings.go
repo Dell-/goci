@@ -28,6 +28,7 @@ var (
 		HTTPAddr       string `ini:"HTTP_ADDR"`
 		HTTPPort       int  `ini:"HTTP_PORT"`
 		Url            string `ini:"URL"`
+		ApiUrl            string `ini:"API_URL"`
 		StaticRootPath string `ini:"STATIC_ROOT_PATH"`
 	}
 
@@ -52,7 +53,6 @@ func init() {
 		fmt.Printf("Fail to create new logger: %v\n", err)
 		os.Exit(1)
 	}
-	log.Info("Init settings for Goci application")
 }
 
 // execPath returns the executable path

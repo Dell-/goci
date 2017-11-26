@@ -4,7 +4,7 @@ import (
 	"github.com/urfave/cli"
 	"github.com/Dell-/goci/pkg/settings"
 	log "github.com/go-clog/clog"
-	"github.com/Dell-/goci/models"
+	"github.com/Dell-/goci/pkg/global"
 )
 
 var Test = cli.Command{
@@ -16,21 +16,12 @@ var Test = cli.Command{
 	},
 }
 
-func init() {
-	settings.NewContext()
-}
-
 func runTest(ctx *cli.Context) error {
+	global.Initialize()
+
 	log.Info("APP: %v", settings.APP)
 	log.Info("SERVER: %v", settings.SERVER)
 	log.Info("DB: %v", settings.DB)
-
-	err := models.NewEngine();
-	if err != nil {
-		log.Fatal(2, "DB fail: %v", err)
-	}
-
-	log.Info("DB ping: %v", models.Ping())
 
 	return nil
 }

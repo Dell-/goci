@@ -1,4 +1,4 @@
+'use strict'
 module.exports = {
-  NODE_ENV: '"production"',
-  API_URL: '"https://jsonplaceholder.typicode.com"'
-};
+  NODE_ENV: '"production"'
+}

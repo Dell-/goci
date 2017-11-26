@@ -15,6 +15,12 @@
 			"revisionTime": "2017-10-05T04:51:49Z"
 		},
 		{
+			"checksumSHA1": "+h1o6LrCCQIRz6fMUZAkKQEJR4s=",
+			"path": "github.com/emicklei/go-restful-openapi",
+			"revision": "0d037b269a5b53b582789e25dee0d0a0614119e5",
+			"revisionTime": "2017-10-12T19:37:02Z"
+		},
+		{
 			"checksumSHA1": "Q0LQ+8fcjj6s4gmXG2mrjPw5Deo=",
 			"path": "github.com/go-clog/clog",
 			"revision": "8492a6faa632c31ba82f562b53b4a6e5eacf2732",
@@ -33,10 +39,22 @@
 			"revisionTime": "2017-10-30T03:07:56Z"
 		},
 		{
+			"checksumSHA1": "oaqlRVvwhDuG6ftArH8TVR2YbR4=",
+			"path": "github.com/icrowley/fake",
+			"revision": "e64cc2cf92049a299f359734c6ea76073f2a8b2c",
+			"revisionTime": "2017-07-23T15:10:11Z"
+		},
+		{
 			"checksumSHA1": "4TIb3LdllvI3pufsT9SSHvx6ewI=",
 			"path": "github.com/mcuadros/go-version",
 			"revision": "88e56e02bea1c203c99222c365fa52a69996ccac",
 			"revisionTime": "2017-10-03T09:47:16Z"
+		},
+		{
+			"checksumSHA1": "uH0XygBiVvVrdTW1Uj593huX35U=",
+			"path": "github.com/satori/go.uuid",
+			"revision": "5bf94b69c6b68ee1b541973bb8e1144db23a194b",
+			"revisionTime": "2017-03-21T23:07:31Z"
 		},
 		{
 			"checksumSHA1": "9ksn2hj7K/jGJHP+JfJBPGw/fjo=",

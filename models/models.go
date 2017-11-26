@@ -35,6 +35,7 @@ var (
 func init() {
 	tables = append(tables,
 		new(User),
+		new(AccessToken),
 	)
 }
 

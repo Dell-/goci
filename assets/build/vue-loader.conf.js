@@ -1,15 +1,9 @@
-const utils = require('./utils');
-const config = require('../config');
-const isProduction = process.env.NODE_ENV === 'production';
+'use strict'
+const utils = require('./utils')
+const config = require('../config')
+const isProduction = process.env.NODE_ENV === 'production'
 
 module.exports = {
-  extractCSS: isProduction,
-  preserveWhitespace: false,
-  postcss: [
-    require('autoprefixer')({
-      browsers: ['last 3 versions']
-    })
-  ],
   loaders: utils.cssLoaders({
     sourceMap: isProduction
       ? config.build.productionSourceMap
@@ -22,4 +16,4 @@ module.exports = {
     img: 'src',
     image: 'xlink:href'
   }
-};
+}

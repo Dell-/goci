@@ -1,35 +1,38 @@
-const path = require('path');
-const utils = require('./utils');
-const config = require('../config');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const vueLoaderConfig = require('./vue-loader.conf');
+'use strict'
+const path = require('path')
+const utils = require('./utils')
+const config = require('../config')
+const vueLoaderConfig = require('./vue-loader.conf')
 
-function resolve(dir) {
+function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
 module.exports = {
   entry: {
-    index: ['babel-polyfill', `./src/index.js`]
+    app: './src/main.js'
   },
   output: {
     path: config.build.assetsRoot,
-    filename: utils.assetsPath('js/[name].js'),
-    publicPath: '/'
+    filename: '[name].js',
+    publicPath: process.env.NODE_ENV === 'production'
+      ? config.build.assetsPublicPath
+      : config.dev.assetsPublicPath
   },
-  plugins: [],
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      'images': 'vue/src/images/',
-      'fonts': path.resolve(__dirname, '../src/fonts'),
       '@': resolve('src'),
-      'public': path.resolve(__dirname, '../public')
+      'src': resolve('src'),
+      'assets': resolve('src/assets'),
+      'components': resolve('src/components'),
+      'services': resolve('src/services'),
+      'directives': resolve('src/directives'),
+      'vuex-store': resolve('src/store')
     }
   },
   module: {
-    noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [
       {
         test: /\.(js|vue)$/,
@@ -76,4 +79,4 @@ module.exports = {
       }
     ]
   }
-};
+}

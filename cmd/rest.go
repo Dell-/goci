@@ -4,7 +4,14 @@ import (
 	"github.com/urfave/cli"
 	"github.com/emicklei/go-restful"
 	"net/http"
-	"log"
+	log "github.com/go-clog/clog"
+	"github.com/Dell-/goci/pkg/settings"
+	"github.com/Dell-/goci/pkg/global"
+	"github.com/Dell-/goci/api"
+	"strconv"
+	restfulspec "github.com/emicklei/go-restful-openapi"
+	"github.com/go-openapi/spec"
+	"path"
 )
 
 var Rest = cli.Command{
@@ -12,86 +19,60 @@ var Rest = cli.Command{
 	Usage:       "Start rest service",
 	Description: "",
 	Action:      runRest,
-	Flags: []cli.Flag{
-		cli.StringFlag{
-			Name:  "port, p",
-			Value: "3000",
-			Usage: "Temporary port number to prevent conflict",
-		},
-	},
-}
-
-type Token struct {
-	access_token string
-}
-
-type TokenResource struct {
-}
-
-func init()  {
-
-}
-
-func createToken(req *restful.Request, resp *restful.Response) {
-	login, err := req.BodyParameter("login")
-
-	if err != nil || login == "" {
-		log.Println("Error: empty login")
-		return
-	}
-
-	pass, err := req.BodyParameter("password")
-
-	if err != nil || pass == "" {
-		log.Println("Error: empty password")
-		return
-	}
-
-	log.Println("Create token for > " + login + "|" + pass)
-}
-
-func basicAuthenticate(req *restful.Request, resp *restful.Response, chain *restful.FilterChain) {
-	// usr/pwd = admin/admin
-	u, p, ok := req.Request.BasicAuth()
-	if !ok || u != "admin" || p != "admin" {
-		resp.AddHeader("WWW-Authenticate", "Basic realm=Protected Area")
-		resp.WriteErrorString(401, "")
-		return
-	}
-	chain.ProcessFilter(req, resp)
-}
-
-func (p TokenResource) Register(container *restful.Container) {
-
-	ws := new(restful.WebService)
-	ws.Consumes(restful.MIME_JSON)
-	ws.Produces(restful.MIME_JSON)
-	ws.Route(ws.POST("/tokens").Filter(basicAuthenticate).To(createToken))
-	container.Add(ws)
 }
 
 func runRest(ctx *cli.Context) error {
+	global.Initialize()
 
-	t := TokenResource{}
 	wsContainer := restful.NewContainer()
-	t.Register(wsContainer)
 
-	// Add container filter to enable CORS
-	cors := restful.CrossOriginResourceSharing{
-		ExposeHeaders:  []string{"X-My-Header"},
-		AllowedHeaders: []string{"Content-Type", "Accept"},
-		AllowedMethods: []string{"POST"},
-		CookiesAllowed: false,
-		Container:      wsContainer}
-	wsContainer.Filter(cors.Filter)
+	// Rest endpoints
+	auth := api.AuthResource{}
+	users := api.UsersResource{}
+	wsContainer.Add(auth.WebService())
+	wsContainer.Add(users.WebService())
 
 	// Add container filter to respond to OPTIONS
 	wsContainer.Filter(wsContainer.OPTIONSFilter)
 
-	log.Print("Start listening on localhost:8080")
-	server := &http.Server{Addr: ":8080", Handler: wsContainer}
+	config := restfulspec.Config{
+		WebServices:                   restful.RegisteredWebServices(), // you control what services are visible
+		WebServicesURL:                settings.SERVER.ApiUrl,
+		APIPath:                       "/apidocs.json",
+		PostBuildSwaggerObjectHandler: enrichSwaggerObject}
+	wsContainer.Add(restfulspec.NewOpenAPIService(config))
 
-	log.Fatal(server.ListenAndServe())
+	Addr := settings.SERVER.HTTPAddr + ":" + strconv.Itoa(settings.SERVER.HTTPPort)
+	log.Info("Start listening on " + Addr)
 
-	return nil
+	// Optionally, you can install the Swagger Service which provides a nice Web UI on your REST API
+	// You need to download the Swagger HTML5 assets and change the FilePath location in the config below.
+	// Open http://localhost:8080/apidocs/?url=http://localhost:8080/apidocs.json
+	http.Handle("/apidocs/", http.StripPrefix("/apidocs/", http.FileServer(http.Dir(path.Join(settings.SERVER.StaticRootPath, "dist")))))
+
+	server := &http.Server{Addr: Addr, Handler: wsContainer}
+
+	return server.ListenAndServe()
+}
+
+func enrichSwaggerObject(swo *spec.Swagger) {
+	swo.Info = &spec.Info{
+		InfoProps: spec.InfoProps{
+			Title:       "Goci",
+			Description: "API Doc",
+			Contact: &spec.ContactInfo{
+				Name:  "john",
+				Email: "john@doe.rp",
+				URL:   "http://johndoe.org",
+			},
+			License: &spec.License{
+				Name: "MIT",
+				URL:  "http://mit.org",
+			},
+			Version: "0.0.0",
+		},
+	}
+	swo.Tags = []spec.Tag{spec.Tag{TagProps: spec.TagProps{
+		Name:        "users",
+		Description: "Managing users"}}}
 }

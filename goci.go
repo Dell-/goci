@@ -7,9 +7,9 @@ package main
 
 import (
 	"github.com/Dell-/goci/cmd"
+	"github.com/Dell-/goci/pkg/settings"
 	"github.com/urfave/cli"
 	"os"
-	"github.com/Dell-/goci/pkg/settings"
 )
 
 func main() {
@@ -20,6 +20,7 @@ func main() {
 	app.Commands = []cli.Command{
 		cmd.Rest,
 		cmd.Web,
+		cmd.Tool,
 		cmd.Test,
 	}
 	app.Flags = append(app.Flags, []cli.Flag{}...)
